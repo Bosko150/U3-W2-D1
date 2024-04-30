@@ -1,7 +1,6 @@
 import { Card } from "react-bootstrap";
 import { Col } from "react-bootstrap";
-import React from "react";
-import CommentArea from "./CommentArea";
+import { Component } from "react";
 
 // const SingleBook = ({ book }) => {
 //   return (
@@ -18,28 +17,21 @@ import CommentArea from "./CommentArea";
 
 // export default SingleBook;
 
-class SingleBook extends React.Component {
-  state = {
-    selected: false,
-  };
-  handleClick = (e) => {
-    if (e.target.tagName === "IMG") {
-      this.setState((prevState) => ({
-        selected: !prevState.selected,
-      }));
-    }
-  };
+class SingleBook extends Component {
   render() {
-    const { selected } = this.state;
     return (
       <Col xs={6} md={3} lg={3}>
-        <Card className={` card ${selected ? "selectedCard" : ""}`} onClick={this.handleClick}>
+        <Card
+          onClick={() => {
+            this.props.setNewAsin(this.props.book.asin);
+          }}
+          className={` card ${this.props.book.asin === this.props.selectedAsin ? "selectedCard" : ""}`}
+        >
           <Card.Img variant="top" src={this.props.book.img} />
           <Card.Body className="d-flex flex-column">
             <Card.Title>{this.props.book.title}</Card.Title>
           </Card.Body>
         </Card>
-        {selected && <CommentArea book={this.props.book} />}
       </Col>
     );
   }

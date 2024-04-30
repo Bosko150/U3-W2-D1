@@ -35,7 +35,12 @@ class BookList extends React.Component {
         />
         <Row className="g-3">
           {searchResult.map((book) => (
-            <SingleBook key={`book-${book.asin}`} book={book} />
+            <SingleBook
+              key={`book-${book.asin}`}
+              book={book}
+              setNewAsin={this.props.setNewAsin}
+              selectedAsin={this.props.selectedAsin}
+            />
           ))}
         </Row>
       </Container>
